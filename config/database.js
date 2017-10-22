@@ -1,5 +1,5 @@
 let Promise = require("bluebird");
-debugger;
+
 let mongoose = Promise.promisifyAll(require("mongoose"));
 let constants = require("./constant");
 

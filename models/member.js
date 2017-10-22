@@ -9,8 +9,29 @@ let MemberModel = new schema({
     Gender: Number,
     Age: Number,
     BG: Number,
-    ContactNumber: String,
-    Email: String,
+    ContactNumber: {
+        type: String,
+        validate: {
+            isAsync: true,
+            validator: (c, vb) => {
+                _MemberModel.find({ ContactNumber: c }, (err, docs) => {
+                    vb(docs.length == 0);
+                });
+            },
+            message: 'Contact Number already exists!'
+        }
+    },
+    Email: {
+        type: String,
+        validate: {
+            isAsync: true,
+            validator: (c, vb) => {
+                _MemberModel.find({ Email: c }, (err, docs) => {
+                    vb(docs.length == 0);
+                });
+            }, message: 'Email already exists!'
+        }
+    },
     PersentAddress: String,
     State: String,
     City: String,

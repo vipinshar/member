@@ -4,13 +4,13 @@ let ObjectId = require('mongodb').ObjectID;
 let _mongoose = require('mongoose');
 let Promise = require("bluebird");
 _mongoose.Promise = require('bluebird');
+let appConstant = require('../config/constant');
 
 let register = {
     SaveData: function (model) {
         return new Promise((resolve, reject) => {
-            debugger;
             let member_model = new member({
-                _id: new ObjectId,
+                _id: new ObjectId(),
                 title: model.title,
                 Name: model.Name,
                 Gender: model.Gender,
@@ -24,9 +24,9 @@ let register = {
                 PermanentAddress: model.PermanentAddress,
                 LastDobated: model.Date
             });
-            member_model.save((err,result)=>{
+            member_model.save((err, result) => {
                 if (err) {
-                    reject(err)
+                    reject(err);
                 }
                 else {
                     resolve(result);
@@ -36,4 +36,4 @@ let register = {
     }
 };
 
-module.exports=register;
+module.exports = register;
